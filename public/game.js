@@ -2,6 +2,13 @@ var socket = io('/');
 
 let clientPlayerNumber = "";
 let isGameStarted = false; 
+
+
+const showWinOverlay = (winner)=>{
+    let winOverlay = document.getElementById("winSection");
+    winOverlay.style.display = "block";
+    document.getElementById("winner").innerHTML = winner;
+}
  
 socket.on('playerNumber', function (data) {
     
@@ -17,6 +24,25 @@ socket.on('gameStart', ()=>{
     isGameStarted = true;
     console.log(`Game Started is ${isGameStarted}`);
     updateTurnDisplay(); 
+});
+
+socket.on('gameWon', (playerNum)=>{
+    isGameStarted = false;
+    console.log(`${playerNum} has won the game!`)
+    showWinOverlay(playerNum);
+});
+
+socket.on('resetBoard', ()=>{
+    let boardCells = document.getElementsByClassName("cell");
+    let boardCellsArray = Array.from(boardCells);
+
+    for(let i = 0; i < boardCellsArray.length; i++)
+    {
+        boardCellsArray[i].innerHTML = "";
+    }
+
+    isGameStarted = true;
+    // isPlayerOneTurn = true;
 });
 
 const updateTurnDisplay = ()=>{
@@ -56,6 +82,7 @@ const onCellClicked = (cell)=>{
 
     if(!isGameStarted)
     {
+        alert("The game isn't started!");
         return;
     }
 
@@ -101,3 +128,30 @@ for(let i = 0; i < cellArray.length; i++)
         onCellClicked(event.target);
     });
 }
+
+let playAgainBtn = document.getElementById("playAgain");
+
+playAgainBtn.addEventListener("click", ()=>{
+    console.log(`${clientPlayerNumber} wants to play Again`);
+
+    socket.emit('playAgainRequest', clientPlayerNumber, ()=>{
+        console.log("Emitting Play again event");
+    });
+
+    let winSect = document.getElementById("winSection");
+    winSect.style.display = "none";
+
+});
+
+let quitBtn = document.getElementById("quit");
+
+quitBtn.addEventListener("click", ()=>{
+    console.log(`${clientPlayerNumber} wants to quit`);
+
+    socket.emit('quitRequest', clientPlayerNumber, ()=>{
+        console.log("Emitting quit event");
+    });
+
+    let winSect = document.getElementById("winSection");
+    winSect.style.display = "none";
+});
