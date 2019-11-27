@@ -3,6 +3,13 @@ var express = require('express');
 var app = express();
 var path = require('path');
 
+var {mongoose} = require('./db/mongoose');
+var {Player} = require('./models/player');
+
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({extended: false }));
+app.use(bodyParser.json());
+
 app.use(express.static(__dirname + "/public"));
 
 let gameBoard = {
@@ -94,6 +101,38 @@ app.get('/', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'index.html'));
 });
 
+//Lobby
+app.get('/lobby', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'lobby.html'));
+});
+
+app.get('/newUser', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'newUser.html'));
+});
+
+app.post('/createUser', async(req, res)=>{
+    console.log(req.body);
+    console.log(`Printing Player Name ${req.body.playerName} `);
+    console.log(`Printing Mom's CC ${req.body.momsCC} `);
+    console.log(`Printing Mom's Exp ${req.body.momsExp} `);
+    console.log(`Printing Mom's CVC ${req.body.momsCVC} `);
+
+    let playerRecord = {
+        name:req.body.playerName,
+        ccNumber: req.body.momsCC,
+        expirationDate:req.body.momsExp,
+        cvcNumber:req.body.momsCVC
+    }
+
+    let newPlayer = new Player(playerRecord);
+
+    const result = await newPlayer.save();
+
+    //Send back _id
+    console.log(result);
+
+    res.status(200).send({id: result._id});
+});
 
 var server = app.listen(port, ()=>{
     console.log(`App started on ${port}`);

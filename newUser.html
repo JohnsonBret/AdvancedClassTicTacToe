@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Create User</title>
+    <link rel="stylesheet" href="/app.css">
+    <link rel="stylesheet" href="/createUser.css">
+</head>
+<body>
+    <main>
+        <div>
+            <h1 id="title">Create New User</h1>
+            <button id="lobbyBack">Back to Lobby</button>
+        </div>
+        <form id="ccForm" action="/createUser" method="POST">
+            <section id="container">
+            <label for="playerName">Player Name</label>
+            <input id="inputName" name="playerName" type="text" required>
+
+            <label for="momsCC">Credit Card</label>
+            <input id="inputCC" name="momsCC" type="number" required/>
+
+            <label for="momsExp">Expiration Date</label>
+            <input id="inputExp" name="momsExp" type="date" required>
+
+            <label for="momsCVC">CVC</label>
+            <input id="inputCVC" name="momsCVC" type="number" required>
+            
+            <input id="submitBtn" type="submit" value="Send">
+            </section>
+        </form>
+
+    </main>
+    <script src="/createUser.js"></script>
+</body>
+</html>
