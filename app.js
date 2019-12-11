@@ -5,6 +5,7 @@ var path = require('path');
 
 var {mongoose} = require('./db/mongoose');
 var {Player} = require('./models/player');
+var {authenticate} = require('./middleware/authenticate');
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false }));
@@ -108,6 +109,25 @@ app.get('/lobby', (req, res)=>{
 
 app.get('/newUser', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'newUser.html'));
+});
+
+app.get('/login', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'login.html'));
+});
+
+app.post('/auth', authenticate, (req, res)=>{
+    console.log("Hit Auth Route");
+    res.status(200).send();
+})
+
+app.post('/login', async(req, res)=>{
+    console.log(req.body);
+
+    let result = await Player.find({name: req.body.playerName});
+
+    console.log(result);
+
+    res.status(200).send({result});
 });
 
 app.post('/createUser', async(req, res)=>{
