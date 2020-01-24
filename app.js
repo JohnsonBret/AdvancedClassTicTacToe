@@ -1,17 +1,43 @@
+require('./config/config');
+
 var express = require('express');
 
 var app = express();
 var path = require('path');
+var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 
 var {mongoose} = require('./db/mongoose');
 var {Player} = require('./models/player');
 var {authenticate} = require('./middleware/authenticate');
+
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + "/public"));
+
+
+app.post('/charge', async (req, res)=>{
+
+    console.log(req.body);
+
+    const customer = await stripe.customers.create({
+        email: "bret@ucode.com",
+        source: req.body.stripeToken
+    });
+    
+    const charge = await stripe.charges.create({
+        amount: 7000,
+        description: "",
+        currency: 'usd',
+        customer: customer.id
+    });
+})
+
+
+
 
 let gameBoard = {
     c1r1:"",

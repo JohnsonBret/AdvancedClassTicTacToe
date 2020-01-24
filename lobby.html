@@ -17,7 +17,22 @@
             <h1 id="title">Lobby</h1>
             <button id="tictactoe">Tic Tac Toe</button>
         </div>
-       
+
+        <form action="/charge" method="POST">
+            <script
+                src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_bfUp6hcgE6avxAdkPO57yz5P00TR81Wtey"
+                data-amount="7000"
+                data-name="The Name of Your Product"
+                data-description="Some description of your project"
+                data-billing-address="true"
+                data-shipping-address="true"
+                data-label="Buy Item"
+                data-image="/gorn.jpg"
+                data-locale="auto">
+            </script>
+            <input type="hidden" name="productId" value="1001">
+        </form>
 
     </main>
     <script src="/lobby.js"></script>
