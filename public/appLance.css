@@ -1,0 +1,134 @@
+label
+{
+  color:white;
+}
+h3
+{
+  color:white;
+}
+h10
+{
+  color:white;
+}
+h2
+{
+  color:white;
+}
+body
+{
+  background-color:black;
+}
+p
+{
+  font-size:20px;
+  color:white;
+}
+nav
+  {    
+    text-decoration:none;
+    display:flex;
+    justify-content: center;
+    box-shadow:0px 6px 20px gray;
+    background-color: skyblue;
+    padding: 25px;
+  }
+  nav a
+  {
+    color:whitesmoke;
+    text-decoration:none;
+    border: 1px solid whitesmoke;
+    font-size:30px;
+  }
+  nav a:hover
+  {
+    color:grey;
+    border: 1px solid grey;
+    box-shadow: 5px 5px 3px grey;
+  }
+ 
+  nav a:active
+  {
+    box-shadow: 0px 0px 0px grey;
+  }
+   nav span
+  {
+    color:darkblue;
+    text-decoration:none;
+    border: 1px solid whitesmoke;
+    padding: 5px;
+  }
+  footer nav
+  {    
+    text-decoration:none;
+    display:flex;
+    justify-content: center;
+    /*box-shadow:0px 6px 20px gray;*/
+    /*background-color: skyblue;*/
+    padding: 25px;
+  }
+  footer nav a
+  {
+    color:whitesmoke;
+    text-decoration:none;
+    border: 1px solid whitesmoke;
+    font-size:30px;
+  }
+  footer nav a:hover
+  {
+    color:grey;
+    border: 1px solid grey;
+    box-shadow: 5px 5px 3px grey;
+  }
+ 
+  footer nav a:active
+  {
+    box-shadow: 0px 0px 0px grey;
+  }
+  footer nav span
+  {
+    color:darkblue;
+    text-decoration:none;
+    border: 1px solid whitesmoke;
+    padding: 5px;
+  }
+ 
+ 
+  img
+  {
+    object-fit:cover;
+  }
+  nav a:first-child
+  {
+    border: none;
+    box-shadow:0px 0px 0px 0px;
+    font-size: 0px;
+    width: 150px;
+    display: flex;
+  }
+   nav img a:hover
+   {
+    box-shadow:0px 0px 0px 0px;
+   }
+  nav a img
+  {
+    width:80%;
+  /*margin-right:50px;*/
+  padding:0px;
+ 
+
+  }
+  body
+  {
+    margin:0px;
+  }
+  li
+  {
+  color:whitesmoke;
+  font-size:19px;
+  }
+ 
+.current
+{
+  color:darkblue;
+}
+

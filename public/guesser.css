@@ -1,0 +1,41 @@
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: sans-serif;
+}
+
+#instructions{
+    display: block;
+    text-align: center;
+}
+
+#inputGuess{
+    margin-bottom: 20px;
+}
+
+#guessDiv{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#resultDiv{
+    display: none;
+}
+
+#wrong{
+    background-color: #f44336;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border-radius: 5px;
+  }

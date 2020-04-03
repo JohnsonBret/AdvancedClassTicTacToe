@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guesser</title>
+    <link rel="stylesheet" href="guesser.css">
+</head>
+<body>
+    <main>
+        <div id="guessDiv">
+            <h2 id="instructions">Think of a number between 1 and 10</h2>
+            <label for="guessNumber">Input Number</label>
+            <input type="number" name="guessNumber" id="inputGuess">
+            <button id="guessBtn" class="button">Try and Guess computer</button>
+        </div>
+        <div id="resultDiv">
+            <h2 id="guessResult"></h2>
+            <button class="button" id="correct">You got it!</button>
+            <button class="button" id="wrong">WRONG!</button>
+        </div>
+    </main>
+    <script src="/guesser.js"></script>
+</body>
+</html>

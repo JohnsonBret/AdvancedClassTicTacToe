@@ -1,0 +1,137 @@
+<style>
+    label{
+      font-family:sans-serif;
+      Color:lightgrey;
+      display:block;
+    }
+    button{
+      font-family:sans-serif;
+      display:block;
+    }
+     
+    }            
+    input{
+      color:lavender
+    }
+    }
+    img{
+    object:fit;
+    }
+    option{
+      color:lavender;
+    }
+    body{
+    
+      background-color:white;
+    }
+    legend{
+      Font-family:sans-serif;
+      color:lavender;
+      font-size:30px;
+    }
+    .input list{
+    border:none;
+    padding:0px;
+    }
+    .input legend{
+      font-size:18px;
+    }
+    .input input{
+      width:10%;
+    }
+    .radios label{
+      margin:0px;
+      font-size:16px;
+    }
+       input:hover {
+       border: 2px solid lightgrey;
+      }
+      input{
+        border:2px solid lavender;
+      }
+      input:focus{
+        box-shadow: 2px 2px 5px black;
+      }
+      button{
+        width:100%;
+        height:40px;
+        background: linear-gradient(to left, lightblue, lightgreen, pink);
+        color:white;
+        box-shadow:2px 2px 5px black;
+        font-size:18px;
+        margin-top:20px;
+      }
+      button:active{
+        box-shadow:none;
+      }
+    </style>
+    <body>
+     
+            <form action="/Kaylee" method="POST">
+        <fieldset>
+          <legend>About You</legend>
+       
+        <fieldset>
+        <legend>Your Name</legend>
+        <input type="text" name="Name" required>
+        </fieldset>
+       
+        <fieldset>
+        <legend>Your Email</legend>
+        <input type="email" required>
+        </fieldset>
+       
+        <fieldset>
+          <legend>Your Phone Number</legend>
+          <label>(Not Required)</label>
+        <input type="tel">
+        </fieldset>
+        </fieldset>
+       
+       <fieldset>
+         <legend>Quiz</legend>
+       
+        <fieldset>
+        <input type="date" name="Birthday" required>
+        </fieldset>
+       
+        <fieldset>
+        <legend>How We Met</legend>
+        <textarea name="How-We-Met" minlength="1" maxlength="1000" required></textarea>
+        </fieldset>
+       
+        <fieldset>
+        <legend>What School Did I Go To?</legend>
+        <select name="School" required>
+          <option>Blank</option>
+          <option>Madison Elementary School</option>
+          <option>Lincoln Elementary School</option>
+          <option>Jefferson Elementary School</option>
+        </select>
+        </fieldset>
+       
+        <fieldset>
+        <legend>What Is My Favorite Number?</legend>
+        <label>(Between 0 And 10)</label>
+        <input type="number" name="fav-number" min="0" max="10">
+        </fieldset>
+       
+        <fieldset class="input-list" required>
+        <legend>Who Is My Favorite Singer?</legend>
+        <label><input type="Radio" name="Favorite-Singer" value="Taylor-Swift">Taylor Swift</label>
+        <label><input type="Radio" name="Favorite-Singer" value="Ariana-Grande">Ariana Grande</label>
+        <label><input type="Radio" name="Favorite-Singer" value="Megan-Trainor">Megan Trainor</label>
+        </fieldset>
+       
+         <fieldset class="input-list" required>
+        <legend>What Do I Currently Do?</legend>
+        <label><input type="checkbox" name="Activites" value="Soft-Ball">Soft Ball</label>
+        <label><input type="checkbox" name="Activites" value="Soccer">Soccer</label>
+        <label><input type="checkbox" name="Activites" value="Piano">Piano</label>
+        <label><input type="checkbox" name="Activites" value="Coding">Coding</label>
+        <label><input type="checkbox" name="Activites" value="Tennis">Tennis</label>
+        </fieldset>
+     
+        <button>Send</button>
+       <form>
+    </body>

@@ -9,6 +9,7 @@ var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 var {mongoose} = require('./db/mongoose');
 var {Player} = require('./models/player');
+var {Whatever} = require('./models/whatever');
 var {authenticate} = require('./middleware/authenticate');
 
 
@@ -128,6 +129,14 @@ app.get('/', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/aframe', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'aFrame.html'));
+});
+
+app.get('/minesweeper', async (req,res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'minesweeper.html'));
+});
+
 //Lobby
 app.get('/lobby', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'lobby.html'));
@@ -141,10 +150,18 @@ app.get('/login', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'login.html'));
 });
 
+app.get('/Kaylee', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'kayleeForm.html'));
+});
+
+app.get('/guesser', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'guesser.html'));
+})
+
 app.post('/auth', authenticate, (req, res)=>{
     console.log("Hit Auth Route");
     res.status(200).send();
-})
+});
 
 app.post('/login', async(req, res)=>{
     console.log(req.body);
@@ -154,6 +171,19 @@ app.post('/login', async(req, res)=>{
     console.log(result);
 
     res.status(200).send({result});
+});
+
+app.get('/Lance', async (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'Form.html'));
+});
+
+app.post('/Lance', async (req, res)=>{
+    console.log(req.body);
+
+    res.send({
+        body: req.body,
+        msg: "This is what the computer sees when you send your Form LANCEEEEEEE!!!!"
+    });
 });
 
 app.post('/createUser', async(req, res)=>{
