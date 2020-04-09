@@ -129,6 +129,10 @@ app.get('/', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/poker', (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'poker.html'));
+});
+
 app.get('/aframe', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'aFrame.html'));
 });
