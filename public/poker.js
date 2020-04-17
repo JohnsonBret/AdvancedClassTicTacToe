@@ -19,6 +19,15 @@ const spades = "&#9824;";
 const hearts = "&#9829;";
 const diamonds = "&#9670;";
 
+function cardSuitIsRed(suit){
+    if(suit == "D" || suit =="H"){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function getSuitUnicode(suit)
 {
     if(suit == "S")
@@ -43,6 +52,8 @@ function createCardElement(selectedCard)
     let split = selectedCard.split(" ");
 
     let suit = getSuitUnicode(split[0]);
+    let color = cardSuitIsRed(split[0]);
+
     let cardNumber = split[1];
 
     let cardContainer = document.createElement("div");
@@ -58,6 +69,11 @@ function createCardElement(selectedCard)
     middleSuitNumber.classList.add("middleSuit");
     bottomSuitNumber.classList.add("bottomSuit");
     cardContainer.classList.add("cardContainer");
+
+    if(color == true)
+    {
+        cardContainer.classList.add("red");
+    }
 
     cardContainer.appendChild(topSuitNumber);
     cardContainer.appendChild(middleSuitNumber);
@@ -95,16 +111,44 @@ function dealHand()
             }
         });
 
-        if(result === true)
+        console.log(`is this the found card? ${result}`);
+        if(result != undefined)
         {
             console.log("Find a new card -> Go to the next loop Cycle");
+            i--;
             continue;
         }
 
         dealtCards.push(selectedCard);
         let cardElement = createCardElement(selectedCard);
         addCardToHand(cardElement, i);
+
+        if(i < 5)
+        {
+            dealerHand.push(selectedCard);
+        }
+        else{
+            playerHand.push(selectedCard);
+        }
     }
 }
 
+function analyzeHand(hand){
+    console.log(hand);
+
+    let numbers = [];
+    let suits = [];
+    for(let i = 0; i < 5; i++)
+    {
+        console.log(`Current Card in hand ${hand[i]}`);
+        console.log(`Current Card Spilit ${hand[i].split(" ")}`);
+        suits.push(hand[i].split(" ")[0]);
+        numbers.push(hand[i].split(" ")[1]);
+    }
+
+    console.log(`Numbers ${numbers} Suits ${suits}`);
+}
+
 dealHand();
+analyzeHand(dealerHand);
+analyzeHand(playerHand);
