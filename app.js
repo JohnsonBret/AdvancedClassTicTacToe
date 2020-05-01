@@ -139,7 +139,7 @@ app.get('/iamstealingyourinformation', async(req, res)=>{
     try{
         let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
         let result = await axios.get(ipURL);
-        res.status(200).send(result);
+        res.status(200).send(JSON.stringify(result));
     }
     catch(e){
         res.status(200).send(e);
