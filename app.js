@@ -136,10 +136,14 @@ app.get('/', (req, res)=>{
 
 app.get('/iamstealingyourinformation', async(req, res)=>{
 
-    let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
-    let result = await axios.get(ipURL);
-
-    res.status(200).send(result);
+    try{
+        let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
+        let result = await axios.get(ipURL);
+        res.status(200).send(result);
+    }
+    catch(e){
+        res.status(200).send(e);
+    }
 });
 
 app.get('/poker', async(req, res)=>{
