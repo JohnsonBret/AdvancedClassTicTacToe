@@ -137,9 +137,10 @@ app.get('/', (req, res)=>{
 app.get('/iamstealingyourinformation', async(req, res)=>{
 
     try{
-        // let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
-        // let result = await axios.get(ipURL);
-        res.status(200).send(`<h1> Your IP ${req.header('x-forwarded-for') || req.connection.remoteAddress} is now mine -> Spam attack begins! </h1>`);
+        let ipAddress = req.header('x-forwarded-for') || req.connection.remoteAddress;
+        let ipURL = `https://json.geoiplookup.io/${ipAddress}`;
+        let result = await axios.get(ipURL);
+        res.status(200).send(result.data);
     }
     catch(e){
         res.status(200).send(e);
