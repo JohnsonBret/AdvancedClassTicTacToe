@@ -101,20 +101,20 @@ function dealHand()
     {
         //random card from cards?
         let selectedCard = cards[Math.floor(Math.random() * 52)];
-        console.log(`Dealt card-> ${selectedCard}`);
+        // console.log(`Dealt card-> ${selectedCard}`);
 
         //What should happen if we randomly get a card that has already been dealt?
         let result = dealtCards.find((dealtCard)=>{
             if(dealtCard == selectedCard){
-                console.log(`Selected Card ${selectedCard} is already dealt!`);
+                // console.log(`Selected Card ${selectedCard} is already dealt!`);
                 return true;
             }
         });
 
-        console.log(`is this the found card? ${result}`);
+        // console.log(`is this the found card? ${result}`);
         if(result != undefined)
         {
-            console.log("Find a new card -> Go to the next loop Cycle");
+            // console.log("Find a new card -> Go to the next loop Cycle");
             i--;
             continue;
         }
@@ -140,8 +140,8 @@ function analyzeHand(hand){
     let suits = [];
     for(let i = 0; i < 5; i++)
     {
-        console.log(`Current Card in hand ${hand[i]}`);
-        console.log(`Current Card Spilit ${hand[i].split(" ")}`);
+        // console.log(`Current Card in hand ${hand[i]}`);
+        // console.log(`Current Card Spilit ${hand[i].split(" ")}`);
         suits.push(hand[i].split(" ")[0]);
         numbers.push(hand[i].split(" ")[1]);
     }
@@ -152,3 +152,34 @@ function analyzeHand(hand){
 dealHand();
 analyzeHand(dealerHand);
 analyzeHand(playerHand);
+
+// Version 2
+let titleArray = [
+    "♣ Poker",
+    "♣ ♠ Poker",
+    "♣ ♠ Poker ♥",
+    "♣ ♠ Poker ♥ ◆",
+    "🎂 Happy Birthday 🎂",
+    "Call your Mom 📞",
+    "She misses you.. 📞",
+    "👓 Report suspicious activity 👓",
+]
+
+let currentMsg = 0;
+
+
+setInterval(()=>{
+
+    //change what is being displayed in our array
+
+    currentMsg++;
+    if(currentMsg >= titleArray.length)
+    {
+        currentMsg = 0;
+    }
+    document.title = titleArray[currentMsg];
+
+    console.log(`Current Message variable is ${currentMsg} 
+In the array this index is ${titleArray[currentMsg]}`)
+
+}, 1000);

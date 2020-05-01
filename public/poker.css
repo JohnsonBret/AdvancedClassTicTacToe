@@ -12,6 +12,10 @@ main{
     width: 100%;
 }
 
+title{
+    color: red;
+}
+
 #dealer{
     grid-column: 1/2;
     grid-row: 1/2;
@@ -23,12 +27,12 @@ main{
     grid-template-rows: minmax(0, 1fr);
     column-gap: 9rem;
     padding: 3rem 9rem;
+    min-height: 33%;
 }
 
 #space{
     grid-column: 1/2;
     grid-row: 2/3;
-    min-height: 30%;
 }
 
 #player{

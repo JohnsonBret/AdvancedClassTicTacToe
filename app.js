@@ -5,6 +5,9 @@ var express = require('express');
 var app = express();
 var path = require('path');
 var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+var ip = require('ip');
+
+const axios = require('axios');
 
 
 var {mongoose} = require('./db/mongoose');
@@ -18,6 +21,8 @@ app.use(bodyParser.urlencoded({extended: false }));
 app.use(bodyParser.json());
 
 app.use(express.static(__dirname + "/public"));
+
+app.set('trust proxy', true);
 
 
 app.post('/charge', async (req, res)=>{
@@ -129,7 +134,24 @@ app.get('/', (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/poker', (req, res)=>{
+app.get('/iamstealingyourinformation', async(req, res)=>{
+
+    let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
+    let result = await axios.get(ipURL);
+
+    res.status(200).send(result.data);
+
+});
+
+app.get('/poker', async(req, res)=>{
+
+    console.log(ip.address());
+
+    let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
+    let result = await axios.get(ipURL);
+
+    console.log(result.data);
+
     res.status(200).sendFile(path.join(__dirname, 'poker.html'));
 });
 
