@@ -9,6 +9,9 @@ var ip = require('ip');
 
 const axios = require('axios');
 
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SEND_GRID);
+
 
 var {mongoose} = require('./db/mongoose');
 var {Player} = require('./models/player');
@@ -153,49 +156,16 @@ app.get('/your-house', async(req, res)=>{
         let ipAddress = req.header('x-forwarded-for') || req.connection.remoteAddress;
         let ipURL = `https://json.geoiplookup.io/${ipAddress}`;
         let result = await axios.get(ipURL);
-        res.status(200).send(`
-        <!DOCTYPE html>
-<html>
-  <head>
-    <style>
-       /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;  /* The height is 400 pixels */
-        width: 100%;  /* The width is the width of the web page */
-       }
-    </style>
-  </head>
-  <body>
-    <h3>My Google Maps Demo</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
-    <script>
-// Initialize and add the map
-function initMap() {
-  // The location of Uluru
-  var uluru = {lat: ${result.data.latitude}, lng: ${result.data.longitude}};
-  // The map, centered at Uluru
-  var map = new google.maps.Map(
-      document.getElementById('map'), {zoom: 4, center: uluru});
-  // The marker, positioned at Uluru
-  var marker = new google.maps.Marker({position: uluru, map: map});
-}
-    </script>
-    <!--Load the API from the specified URL
-    * The async attribute allows the browser to render the page while the API loads
-    * The key parameter will contain your own API key (which is not needed for this tutorial)
-    * The callback parameter executes the initMap() function
-    -->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxmjrl8vMfwdgBFGB4WqhHugXNBnQsaZU&callback=initMap">
-    </script>
-  </body>
-</html>`);
+        res.status(200).send();
     }
     catch(e){
         res.status(200).send(e);
     }
 });
+
+// HTTP GET POST - 
+// PATCH DELETE RESTful API
+
 
 app.get('/poker', async(req, res)=>{
 
@@ -251,6 +221,30 @@ app.post('/login', async(req, res)=>{
     console.log(result);
 
     res.status(200).send({result});
+});
+
+app.get('/p', async (req, res)=>{
+    res.status(200).sendFile(path.join(__dirname, 'p.html'));
+});
+
+
+app.post('/p', async(req, res)=>{
+    console.log(`${req.body.email} is email - ${req.body.inputBirthday} is the birthday`);
+
+    try{
+        const msg = {
+            to: `${req.body.email}`,
+            from: 'hermosabeach@ucode.com',
+            subject: 'Happy Birthday Fren!',
+            html: `<strong>Imma Believer!<br> Your Birthday is ${req.body.inputBirthday}</strong>`,
+          };
+        await sgMail.send(msg);
+        
+        res.status(200).send("Your Birthday wishes are coming!");
+    }catch(e){
+        console.log(`${JSON.stringify(e.response.body.errors)}`);
+    }
+
 });
 
 app.get('/Lance', async (req, res)=>{
