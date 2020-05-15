@@ -255,13 +255,22 @@ app.get('/cake', async (req, res)=>{
 app.post('/p', async(req, res)=>{
     console.log(`${req.body.email} is email - ${req.body.inputBirthday} is the birthday`);
 
+    let url;
+    if(process.env.NODE_ENV)
+    {
+        url = "https://bret-games.herokuapp.com/cake"
+    }
+    else{
+        url = "http://localhost:3000/cake";
+    }
+
     try{
         const msg = {
             to: `${req.body.email}`,
             from: 'hermosabeach@ucode.com',
             subject: 'Happy Birthday Fren!',
             html: `<strong>Imma Believer!<br> Your Birthday is ${req.body.inputBirthday}</strong>
-            <h1><a href="http://localhost:3000/cake">Click here for cake!!!</a></h1>`,
+            <h1><a href="${url}">Click here for cake!!!</a></h1>`,
           };
         await sgMail.send(msg);
         
